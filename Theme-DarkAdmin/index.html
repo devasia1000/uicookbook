@@ -37,7 +37,7 @@
             </div>
 
                 <ul class="nav navbar-nav navbar-right navbar-user">
-                    
+                    <!--
                     <li class="dropdown user-dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Steve Miller<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -47,158 +47,39 @@
                             <li><a href="signin.html"><i class="fa fa-power-off"></i> Log Out</a></li>
 
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="divider-vertical"></li>
-                    <li>
-                        <form class="navbar-search">
-                            <input type="text" placeholder="Search" class="form-control">
-                        </form>
-                    </li>
                 </ul>
             </div>
         </nav>
 
         <div id="page-wrapper">
+            <H1>Search Recipes</H1>
+            <table width="100%">
+            <tr>
+                <td width="150px">
+                <div class="form-group" style="margin-bottom:0px;">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Home - UI Cookbook</h1>
-                    
+                    <select class="form-control">
+                        <option><b>Recipe Name</b></option>
+                        <option><b>Author</b></option>
+                        <option><b>Ingredient</b></option>
+                    </select>
                 </div>
-            </div>
-
-            <div class="column">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> Recipes</h3>
-                        </div>
-                        <div class="panel-body feed">
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
+                </td>
+                <td>
+                <div class="form-group input-group" style="margin-bottom:0px;">
+                    <input type="text" placeholder = "Search" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                    </span>
                 </div>
-            </div>
-           
-            <div class="column">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> Favorites</h3>
-                        </div>
-                        <div class="panel-body feed">
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> One-Click Shopping List</h3>
-                        </div>
-                        <div class="panel-body feed">
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                        
-                        
-                    </div>
-
-                </div>
-            </div>
+                </td>
+            </tr>
+            </table>
         </div>
+
+
 
     </div>
     <!-- /#wrapper -->
