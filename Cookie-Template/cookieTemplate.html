@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function setCookie(cookieName, cookieValue, daysToExpire) {
+    var d = new Date();
+    d.setTime(d.getTime() + (daysToExpire*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cookieName + "=" + cookieValue + "; " + expires;
+}
+
+function getCookie(cookieName) {
+    var name = cookieName + "=";
+    var cookieArray = document.cookie.split(';');
+    for(var i=0; i<cookieArray.length; i++) {
+        var c = cookieArray[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user=getCookie("username");
+    if (user != "") {
+        alert("Welcome back, " + user + "!");
+    } 
+    else 
+    {
+       user = prompt("Please enter your name:","");
+       var attempt = 2;
+       while (user == "" || user == null)
+       {
+            if (attempt >= 3)
+                user = prompt("You will not be allowed to use this site before enabling cookies and providing a valid name. Please enter a valid name:", "");
+            else
+                user = prompt("Ray stop trying to break my code!!!!!! Please enter a valid name:", "");            
+            if (user != "" && user != null) break;
+            attempt++;
+       }
+       if (user != "" && user != null) {
+           setCookie("username", user, 30);
+       }
+    }
+}
+
+</script>
+</head>
+<body onload="checkCookie()">
+</body>
+</html>
