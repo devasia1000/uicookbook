@@ -68,8 +68,6 @@
             $result = $statement->fetch();
 
             echo '1';
-            session_start();
-            $_SESSION['userEmail'] = $value;
             $statement->free_result();
             $statement->close();
             return;
@@ -107,12 +105,11 @@
 		
 		$recipeName = $_GET["recipeName"];
 		$steps = $_GET["steps"];
-		$recipeUrl = $_GET["recipeUrl"];
 		$userEmail = $_GET["userEmail"];
 		
 		//echo("recipeId $recipeId<br>recipeName $recipeName<br>steps $steps<br>recipeUrl $recipeUrl<br>userEmail $userEmail");
 		
-		$query_string = "INSERT INTO recipes(recipeName, steps, recipeURL, userEmail) VALUES ('$recipeName', '$steps', '$recipeUrl', '$userEmail')";
+		$query_string = "INSERT INTO recipes(recipeName, steps, userEmail) VALUES ('$recipeName', '$steps', '$userEmail')";
 		
 		//execute the query. 
 		$result = $link->query($query_string);
@@ -135,10 +132,9 @@
 		$recipeId = $_GET["recipeId"];
 		$newRecipeName = $_GET["newRecipeName"];
 		$newSteps = $_GET["newSteps"];
-		$newRecipeUrl = $_GET["newRecipeUrl"];
 		$newUserEmail = $_GET["newUserEmail"];
 		
-		$query_string = "UPDATE recipes SET recipeName='$newRecipeName', steps='$newSteps', recipeUrl='$newRecipeUrl', userEmail='$newUserEmail' WHERE recipeId='$recipeId'";
+		$query_string = "UPDATE recipes SET recipeName='$newRecipeName', steps='$newSteps', userEmail='$newUserEmail' WHERE recipeId='$recipeId'";
 		
 		//execute the query. 
 		$result = $link->query($query_string);

@@ -11,14 +11,7 @@ require 'header.php';
     function handleAuthentication() {
         var loginID = $("#identity").val();
         var password = $("#password").val();
-        var result = checkLogin(loginID, password);
-        if(result === "1") {
-            alert("Success");
-            parent.location='home.php';
-        }
-        else {
-            alert("Fail");
-        }
+        parent.location = 'authenticate.php?identityToken=' + loginID + "&password=" +password;
     }
 </script>
 <div id="page-wrapper">

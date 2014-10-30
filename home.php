@@ -7,12 +7,8 @@
 ?>
 
 <?php
-session_start();
 if (isset($_SESSION['userEmail'])) {
     $GLOBALS['userEmail'] = $_SESSION['userEmail'];
-}
-else {
-    $GLOBALS['userEmail'] = NULL;
 }
 ?>
 
@@ -174,7 +170,7 @@ function handleDelete(recipeid) {
 <script>
 
 function handleEdit(recipeid) {
-	results = searchRecipe (recipeid, '', '', '', '').split(";;;");
+	results = searchRecipe (recipeid, '', '', '').split(";;;");
 	recipeName = results[1];
 	recipeSteps = results[2];
 
@@ -189,8 +185,8 @@ function submitEditHandler(event) {
 	var userEmail = "<?php echo $GLOBALS['userEmail'];?>";
 	var recipeName = $("#editName").val();
 	var recipeSteps = $("#editSteps").val();
-	
-	updateRecipe (event.data.id, recipeName, recipeSteps, "fake.com", userEmail)
+
+    updateRecipe (event.data.id, recipeName, recipeSteps, userEmail)
 	alert("Your recipe has been updated");
 	location.reload();
 }
@@ -213,7 +209,7 @@ $('#addRecipeDialog').dialog({
             var recipeName = $("#addName").val();
             var recipeSteps = $("#addSteps").val();
             
-            insertRecipe(recipeName, recipeSteps, "fake.com", userEmail);
+            insertRecipe(recipeName, recipeSteps, userEmail);
             alert("Recipe Added");
             
             location.reload();           

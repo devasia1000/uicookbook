@@ -18,7 +18,7 @@ require 'header.php';
         }
         alert("Successfully Registered");
         // take to login page
-        parent.location='login.php'
+        parent.location='signin.php'
     }
 </script>
     <div id="page-wrapper">

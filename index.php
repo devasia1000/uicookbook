@@ -1,7 +1,6 @@
 <?php
 // require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';  // Works on Server
 require 'html_header.php';
-session_start();
 ?>
 <body>
     <?php
@@ -44,12 +43,12 @@ session_start();
     	    
     	    if(field == "Recipe Name") {
     	    	//resultsBox.value = searchRecipe("", search, "", "", "");
-		displaySearchResults(searchRecipe("", search, "", "", ""));
+		displaySearchResults(searchRecipe("", search, "", ""));
 
     	    }
     	    if(field == "User Email") {
     	    	//resultsBox.value = searchRecipe("", "", "", "", search);
-   	    	displaySearchResults(searchRecipe("", "", "", "", search));
+   	    	displaySearchResults(searchRecipe("", "", "", search));
     	    }
     	}
     	

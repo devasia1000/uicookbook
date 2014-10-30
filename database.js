@@ -60,9 +60,9 @@ INPUTS: recipeName
 OUTPUTS: returns a 1 if insert is successful
 	 returns a 0 if insert is NOT successful
 */
-function insertRecipe (recipeName, steps, recipeUrl, userEmail) {
+function insertRecipe (recipeName, steps, userEmail) {
 	
-	if (recipeName === '' || steps === '' || recipeUrl === '' || userEmail === '') {
+	if (recipeName === '' || steps === '' || userEmail === '') {
 		return 0;
 	}
 	
@@ -71,7 +71,6 @@ function insertRecipe (recipeName, steps, recipeUrl, userEmail) {
 	var query_string = 'query_type=2'
 				+ '&recipeName=' + recipeName
 				+ '&steps=' + steps
-				+ '&recipeUrl=' + recipeUrl
 				+ '&userEmail=' + userEmail;
 
 	xmlHttp = new XMLHttpRequest();
@@ -115,9 +114,9 @@ INPUTS: recipeId
 OUTPUTS: returns a 1 if insert is successful
 	 returns a 0 if insert is NOT successful
 */
-function updateRecipe (recipeId, newRecipeName, newSteps, newRecipeUrl, newUserEmail) {
+function updateRecipe (recipeId, newRecipeName, newSteps, newUserEmail) {
 
-	if (recipeId === '' || newRecipeName === '' || newSteps === '' || newRecipeUrl === '' || newUserEmail === '') {
+	if (recipeId === '' || newRecipeName === '' || newSteps === '' || newUserEmail === '') {
 		return 0;	
 	}
 	
@@ -127,7 +126,6 @@ function updateRecipe (recipeId, newRecipeName, newSteps, newRecipeUrl, newUserE
 				+ '&recipeId=' + recipeId
 				+ '&newRecipeName=' + newRecipeName
 				+ '&newSteps=' + newSteps
-				+ '&newRecipeUrl=' + newRecipeUrl
 				+ '&newUserEmail=' + newUserEmail;
 
 	xmlHttp = new XMLHttpRequest();
