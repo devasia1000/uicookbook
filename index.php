@@ -1,9 +1,12 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
+// require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';  // Works on Server
+require 'html_header.php';
+session_start();
 ?>
 <body>
     <?php
-    require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+    // require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+    require 'header.php';
     ?>
     <script type="text/javascript">
     
@@ -20,8 +23,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
 				} else if (j == 2) {
 					resultString += "\nRecipe Steps:\n\t" + temp2[j].replace(/\n/g, '\n\t');
 				} else if (j == 3) {
-					resultString += "\nRecipe Url: " + temp2[j];
-				} else if (j == 4) {
 					resultString += "\nUser Email: " + temp2[j];
 				}
 			}
@@ -70,7 +71,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
             <div class="form-group input-group" style="margin-bottom:0px;">
                 <input id="search-bar" type="text" placeholder = "Search" class="form-control">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" onClick="handleSearch()"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-primary" type="button" onClick="handleSearch()">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </span>
             </div>
             </td>
@@ -85,5 +88,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
     </div>
 </body>
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
+// require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
+require 'html_footer.php';
 ?>

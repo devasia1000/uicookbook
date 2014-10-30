@@ -1,16 +1,16 @@
 /*
 Checks if a give username/passowrd combination is valid
-INPUTS: username - username of user
+INPUTS: identityToken - username or email
 	password - password of user
 OUTPUTS: returns 1 if username/password is valid
 	 returns 0 if username/password is not valid
 */
-function checkLogin (username, password) {
+function checkLogin (identityToken, password) {
 	
 	var xmlHttp = null;
 
 	var query_string = 'query_type=0'
-				+ '&username=' + username
+				+ '&identityToken=' + identityToken
 				+ '&password=' + password;
 
 	xmlHttp = new XMLHttpRequest();
@@ -33,7 +33,7 @@ OUTPUTS: returns a list of recipes that match the search. Each recipe is
 	 delimited by a '<br>' and each field in the recipe is delimited 
 	 by a ';;;'
 */
-function searchRecipe (recipeId, recipeName, steps, recipeUrl, userEmail) {
+function searchRecipe (recipeId, recipeName, steps, userEmail) {
 
 	var xmlHttp = null;
 
@@ -41,7 +41,6 @@ function searchRecipe (recipeId, recipeName, steps, recipeUrl, userEmail) {
 				+ '&recipeId=' + recipeId
 				+ '&recipeName=' + recipeName
 				+ '&steps=' + steps
-				+ '&recipeUrl=' + recipeUrl
 				+ '&userEmail=' + userEmail;
 		
 
@@ -135,6 +134,41 @@ function updateRecipe (recipeId, newRecipeName, newSteps, newRecipeUrl, newUserE
 	xmlHttp.open("GET", "database.php?" + query_string, false);
 	xmlHttp.send(null);
 	return xmlHttp.responseText;
+}
+
+/*
+ Registers a new user into the database
+ newXXX are new values for each of the recipe attributes
+ INPUTS: username, password, email
+ OUTPUTS: returns a true else alerts an error message and returns false;
+*/
+function registerUser(username, email, password) {
+    if (username === '' || email === '' || password === '') {
+        alert("You left a field blank");
+        return 0;
+    }
+    // TODO(rfarias2): more password restraints
+    if (password.length < 8) {
+        alert("Password needs to be more than 8 characters long.");
+        return;
+    }
+    var xmlHttp = null;
+
+    var query_string = 'query_type=5'
+        + '&username=' + username
+        + '&userEmail=' + email
+        + '&password=' + password;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+    if (xmlHttp.responseText === '1') {
+        return true;
+    }
+    else {
+        alert(xmlHttp.responseText);
+    }
+    return false;
 }
 
 /*console.log("Checking correct login:" + checkLogin('devasia', 'password'));

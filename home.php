@@ -1,12 +1,25 @@
 <?php
-    require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
-    require $_SERVER['DOCUMENT_ROOT'] . '/database_interface.php';
-    $GLOBALS['userEmail'] = 'rfarias2@illinois.edu';
+//    require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
+//    require $_SERVER['DOCUMENT_ROOT'] . '/database_interface.php';
+    require 'html_header.php';
+    require 'database_interface.php';
+
 ?>
 
+<?php
+session_start();
+if (isset($_SESSION['userEmail'])) {
+    $GLOBALS['userEmail'] = $_SESSION['userEmail'];
+}
+else {
+    $GLOBALS['userEmail'] = NULL;
+}
+?>
 
 <body>
-
+<script>
+   
+</script>
 
 <style>
 .ui-widget {
@@ -22,7 +35,7 @@
 
 .ui-dialog {
     left: 0;
-    height: 1000px;
+    height: 300px;
     outline: 0 none;
     padding: 0 !important;
     position: absolute;
@@ -50,7 +63,7 @@
 }
 
 .ui-dialog .ui-dialog-titlebar {
-    height: 35px;
+    height: 40px;
     padding: 0.1em .5em;
     position: relative;
     font-size: 2em;
@@ -60,11 +73,10 @@
     border-radius: 0px;
 }
 
-
-
 </style>
     <?php
-    require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+    // require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
+    require 'header.php';
     ?>
 <div id="page-wrapper">
 
@@ -96,17 +108,18 @@
                                 echo $recipe["recipeid"];
                                 echo '">';
                                                                 echo $recipe["recipeName"];
+                                                                echo "    ";
                                echo '</a>';
                                 
-                                $echoString = '<button type="button" class="btn btn-info">
-                    <a class="button-text" href="register.php">Edit</a>
+                               $echoString = 
+               '<button type="button" class="btn btn-info" onclick ="handleEdit(\'' . $recipe["recipeid"] . '\')">
+                    <a class="button-text">Edit</a>
                 </button>
                 <button type = "button" class = "btn btn-info" onclick ="handleDelete(\'' . $recipe["recipeid"] . '\')">
                     <a class="button-text">Delete</a>
                 </button>';
                 
                 	echo $echoString;
-                
                         echo '</div></section>';
                     } 
                     ?>
@@ -117,15 +130,36 @@
                     </section>
                     
                 </div>
-                <button type = "button" id="addRecipe" class = "btn btn-info button-text" onclick="handleClick()">
+                <button type = "button" id="addRecipe" class = "btn btn-info button-text">
                  Add
              </button>
             </div>
         </div>
     </div>
 <div id="addRecipeDialog" title="Add a Recipe">
-    </button>
+    <div style="padding:10px;">
+        <b>Recipe Name:</b></br>
+        <input id="addName"></input>
+        </br></br>
+        <b>Steps:</b>  </br>
+        <textarea id="addSteps" rows="10" cols="75">
+I am a text area for steps.
+        </textarea>
+    </div>
 </div>
+
+<div id="editRecipeDialog" title="Edit a Recipe">
+    <div style="padding:10px;">
+        <b>Recipe Name:</b></br>
+        <input id="editName"></input>
+        </br></br>
+        <b>Steps:</b>  </br>
+        <textarea id="editSteps" rows="10" cols="75">
+I am a text area for steps.
+        </textarea>
+    </div>
+</div>
+
 
 <script>
 
@@ -139,27 +173,75 @@ function handleDelete(recipeid) {
 
 <script>
 
+function handleEdit(recipeid) {
+	results = searchRecipe (recipeid, '', '', '', '').split(";;;");
+	recipeName = results[1];
+	recipeSteps = results[2];
+
+	$("#dialog_submitChanges").off("click");
+	$("#dialog_submitChanges").click({id: recipeid}, submitEditHandler);
+	$("#editRecipeDialog").dialog("open");
+	$("#editName").val(recipeName);
+	$("#editSteps").val(recipeSteps);
+}
+
+function submitEditHandler(event) {
+	var userEmail = "<?php echo $GLOBALS['userEmail'];?>";
+	var recipeName = $("#editName").val();
+	var recipeSteps = $("#editSteps").val();
+	
+	updateRecipe (event.data.id, recipeName, recipeSteps, "fake.com", userEmail)
+	alert("Your recipe has been updated");
+	location.reload();
+}
+
+</script>
+
+<script>
+
+
 $(document).ready( function(){
 // Setup this div as a Dialog
 $('#addRecipeDialog').dialog({
     autoOpen: false,
     width: 600,
     modal: true,
+    resizable: false,
     buttons: {
         "Submit": function() {
-            $(this).dialog("close");
+            var userEmail = "<?php echo $GLOBALS['userEmail'];?>";
+            var recipeName = $("#addName").val();
+            var recipeSteps = $("#addSteps").val();
+            
+            insertRecipe(recipeName, recipeSteps, "fake.com", userEmail);
+            alert("Recipe Added");
+            
+            location.reload();           
         },
-        "Cancel": function() {
-            $(this).dialog("close");
-        }
     },
     dialogClass: 'ui-dialog'
     });
+    
+$('#editRecipeDialog').dialog({
+    autoOpen: false,
+    width: 600,
+    modal: true,
+    resizable: false,
+    buttons: {
+        "Submit Changes": function() {}
+    },
+    dialogClass: 'ui-dialog'
+    });
+   
+   $('.ui-dialog-buttonpane button:contains("Submit Changes")').attr("id", "dialog_submitChanges"); 
 });
 
 $('#addRecipe').click( function() { 
     $("#addRecipeDialog").dialog("open");
 });
+
+
+
 
 </script>
         <!--   
@@ -248,5 +330,6 @@ $('#addRecipe').click( function() {
             </div> -->
 </body>
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
+// require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
+require 'html_footer.php';
 ?>
