@@ -1,10 +1,8 @@
 <?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';  // Works on Server
 require 'html_header.php';
 ?>
 <body>
 <?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
 require 'header.php';
 ?>
 <script>
@@ -46,8 +44,12 @@ require 'header.php';
         </div>
     </div>
 </div>
+<?php if(isset($_GET['status'])): ?>
+    <script>
+        alert('Sign In Failed');
+    </script>
+<?php endif; ?>
 </body>
 <?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
 require 'html_footer.php';
 ?>

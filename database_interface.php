@@ -74,7 +74,7 @@ INPUTS: recipeId
 	userEmail
 OUTPUTS: returns an array of dicts
 */
-function recipeSearch ($recipeId, $recipeName, $steps, $recipeUrl, $userEmail) {
+function recipeSearch ($recipeId, $recipeName, $steps, $userEmail) {
 	// Create connection
 	$link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
 
@@ -82,24 +82,23 @@ function recipeSearch ($recipeId, $recipeName, $steps, $recipeUrl, $userEmail) {
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	
+
 	$recipeId = sanitize($recipeId);
 	$recipeName = sanitize($recipeName);
 	$steps = sanitize($steps);
-	$recipeUrl = sanitize($recipeUrl);
 	$userEmail = sanitize($userEmail);
-	
-	$query_string = "SELECT * FROM recipes WHERE recipeId LIKE '$recipeId' AND recipeName LIKE '$recipeName' AND steps LIKE '$steps' AND recipeUrl LIKE '$recipeUrl' AND userEmail LIKE '$userEmail'";
-	
-	//execute the query. 
+
+	$query_string = "SELECT * FROM recipes WHERE recipeId LIKE '$recipeId' AND recipeName LIKE '$recipeName' AND steps LIKE '$steps' AND userEmail LIKE '$userEmail'";
+
+	//execute the query.
 	$result = $link->query($query_string);
-		
+
 	$result_arr = array();
 	
 	while($row = mysqli_fetch_array($result)) {
-		array_push($result_arr, $row);	
+		array_push($result_arr, $row);
 	}
-	
+
 	return $result_arr;
 }
 
@@ -181,4 +180,21 @@ function updateRecipe ($recipeId, $newRecipeName, $newSteps, $newRecipeUrl, $new
 	return 1;
 }
 
-?>
+function getRecipeIngredients($recipeId) {
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    $query_string = "SELECT ingredientName, amount FROM ingredients WHERE recipeId = '$recipeId'";
+
+    //execute the query.
+    $result = $link->query($query_string);
+
+    $result_arr = array();
+
+    // TODO: fix bug where each field appears twice
+    while($row = mysqli_fetch_array($result)) {
+        array_push($result_arr, $row);
+    }
+
+    return $result_arr;
+}

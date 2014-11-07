@@ -107,15 +107,12 @@
 		$steps = $_GET["steps"];
 		$userEmail = $_GET["userEmail"];
 		
-		//echo("recipeId $recipeId<br>recipeName $recipeName<br>steps $steps<br>recipeUrl $recipeUrl<br>userEmail $userEmail");
-		
 		$query_string = "INSERT INTO recipes(recipeName, steps, userEmail) VALUES ('$recipeName', '$steps', '$userEmail')";
 		
 		//execute the query. 
 		$result = $link->query($query_string);
 		
-		echo('1');
-
+		echo($steps);
 	} else if ($query_type == '3') { // Perform a delete
 	
 		$recipeId = $_GET["recipeId"];
@@ -124,7 +121,11 @@
 		
 		//execute the query. 
 		$result = $link->query($query_string);
-		
+
+        $query_string = "DELETE FROM ingredients WHERE recipeId='$recipeId'";
+
+        $result = $link->query($query_string);
+
 		echo('1');
 		
 	} else if ($query_type == '4') { // Do an update
@@ -169,6 +170,49 @@
             }
 
         }
+    } else if ($query_type == '6') {
+        $recipeId = $_GET["recipeId"];
+        $ingredientName = $_GET["ingredientName"];
+        $amount = $_GET["amount"];
+
+        $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount')";
+
+        //execute the query.
+        $result = $link->query($query_string);
+
+        echo('1');
+    } else if ($query_type == '7') {
+        $recipeId = $_GET["recipeId"];
+
+        $query_string = "SELECT ingredientName, amount FROM ingredients WHERE recipeId = '$recipeId'";
+
+        //execute the query.
+        $result = $link->query($query_string);
+
+        // TODO: fix bug where each field appears twice
+        while($row = mysqli_fetch_array($result)) {
+            echo($row['ingredientName'] . ';;;');
+            echo($row['amount'] . '///');
+        }
+    } else if ($query_type == '8') {
+        $recipeId = $_GET["recipeId"];
+        $ingredientName = $_GET["ingredientName"];
+        $amount = $_GET["amount"];
+
+        $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
+
+        //execute the query.
+        $result = $link->query($query_string);
+
+        echo('1');
+    } else if ($query_type == '9') {
+        $recipeId = $_GET["recipeId"];
+        $ingredientName = $_GET["ingredientName"];
+
+        $query_string = "DELETE FROM ingredients WHERE recipeId='$recipeId' AND ingredientName = '$ingredientName'";
+
+        //execute the query.
+        $result = $link->query($query_string);
     } else {
 		echo("InvalidRequest");
 	}

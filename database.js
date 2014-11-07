@@ -40,7 +40,7 @@ function searchRecipe (recipeId, recipeName, steps, userEmail) {
 	var query_string = 'query_type=1'
 				+ '&recipeId=' + recipeId
 				+ '&recipeName=' + recipeName
-				+ '&steps=' + steps
+				+ '&steps=' + encodeURIComponent(steps)
 				+ '&userEmail=' + userEmail;
 		
 
@@ -61,7 +61,7 @@ OUTPUTS: returns a 1 if insert is successful
 	 returns a 0 if insert is NOT successful
 */
 function insertRecipe (recipeName, steps, userEmail) {
-	
+
 	if (recipeName === '' || steps === '' || userEmail === '') {
 		return 0;
 	}
@@ -70,7 +70,7 @@ function insertRecipe (recipeName, steps, userEmail) {
 
 	var query_string = 'query_type=2'
 				+ '&recipeName=' + recipeName
-				+ '&steps=' + steps
+				+ '&steps=' + encodeURIComponent(steps)
 				+ '&userEmail=' + userEmail;
 
 	xmlHttp = new XMLHttpRequest();
@@ -78,6 +78,29 @@ function insertRecipe (recipeName, steps, userEmail) {
 	xmlHttp.send(null);
 	return xmlHttp.responseText;
 	
+}
+
+/*
+
+ */
+function insertIngredient (recipeId, ingredientName, amount) {
+
+    if (recipeId === '' || ingredientName === '' || amount === '') {
+        return 0;
+    }
+
+    var xmlHttp = null;
+
+    var query_string = 'query_type=6'
+        + '&recipeId=' + recipeId
+        + '&ingredientName=' + ingredientName
+        + '&amount=' + amount;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+
 }
 
 /*
@@ -125,7 +148,7 @@ function updateRecipe (recipeId, newRecipeName, newSteps, newUserEmail) {
 	var query_string = 'query_type=4'
 				+ '&recipeId=' + recipeId
 				+ '&newRecipeName=' + newRecipeName
-				+ '&newSteps=' + newSteps
+				+ '&newSteps=' + encodeURIComponent(newSteps)
 				+ '&newUserEmail=' + newUserEmail;
 
 	xmlHttp = new XMLHttpRequest();
@@ -167,6 +190,49 @@ function registerUser(username, email, password) {
         alert(xmlHttp.responseText);
     }
     return false;
+}
+
+function getRecipeIngredients(recipeId) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=7'
+        + '&recipeId=' + recipeId;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+function updateIngredient(recipeId, ingredientName, ingredientAmount) {
+    if (recipeId === '' || ingredientName === '' || ingredientAmount === '') {
+        return 0;
+    }
+
+    var xmlHttp = null;
+
+    var query_string = 'query_type=8'
+        + '&recipeId=' + recipeId
+        + '&ingredientName=' + ingredientName
+        + '&amount=' + ingredientAmount;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+function deleteIngredient(recipeId, ingredientName) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=9'
+        + '&recipeId=' + recipeId
+        + '&ingredientName=' + ingredientName;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
 }
 
 /*console.log("Checking correct login:" + checkLogin('devasia', 'password'));
