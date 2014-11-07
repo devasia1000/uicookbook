@@ -23,7 +23,7 @@ require 'header.php';
             Username or Email:
         </label>
         <div class="col-md-9">
-            <input type="username" class="form-control" id="identity" placeholder="Enter username / email">
+            <input type="username" class="form-control" id="identity" placeholder="Enter Username or Email">
         </div>
     </div>
     <div>
@@ -39,9 +39,9 @@ require 'header.php';
     <div class="row">
         <div class="col-md-2">
         </div>
-        <div class="col-md-10">
-            <button type="submit" class="btn btn-primary" onclick="handleAuthentication()">
-                <a class="bullshit"><font color = "black">Sign-In</font></a>
+        <div class="col-md-10" style="padding-left: 35px;">
+            <button type="submit" class="btn btn-info" onclick="handleAuthentication()">
+                <a class="button-text">Login</a>
             </button>
         </div>
     </div>

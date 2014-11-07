@@ -30,7 +30,7 @@ require 'header.php';
                 Username:
             </label>
             <div class="col-md-9">
-                <input type="username" class="form-control" id="username" placeholder="Enter username">
+                <input type="username" class="form-control" id="username" placeholder="Enter Username">
             </div>
         </div>
         <div>
@@ -38,7 +38,7 @@ require 'header.php';
                 Email Address:
             </label>
             <div class="col-md-9">
-                <input type="email" class="form-control" id="emailAddress" placeholder="Enter email address">
+                <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address">
             </div>
         </div>
         <div>
@@ -54,9 +54,9 @@ require 'header.php';
         <div class="row">
             <div class="col-md-2">
             </div>
-            <div class="col-md-10">
-                <button type="submit" class="btn btn-primary" onclick="handleRegister()">
-                    <a class="bullshit"><font color = "black">Register</font></a>
+            <div class="col-md-10" style="padding-left: 35px;">
+                <button type="submit" class="btn btn-info" onclick="handleRegister()">
+                    <a class="button-text">Register</a>
                 </button>
             </div>
         </div>

@@ -25,7 +25,7 @@ if (isset($_SESSION['userEmail'])) {
 
 .ui-widget-content {
     background: #F9F9F9;
-    border: 2px solid #00bcd4;
+    border: 2px solid #2a9fd6;
     color: #222222;
 }
 
@@ -52,7 +52,7 @@ if (isset($_SESSION['userEmail'])) {
 }
 
 .ui-widget-header {
-    background: #00bcd4;
+    background: #2a9fd6;
     border: 0;
     color: #fff;
     font-weight: normal;
@@ -78,7 +78,7 @@ if (isset($_SESSION['userEmail'])) {
 
     <div class="row">
         <div class="col-lg-12">
-            <h1>HomePage - UI Cookbook</h1>
+            <h1>Homepage - UI Cookbook</h1>
         </div>
     </div>
 

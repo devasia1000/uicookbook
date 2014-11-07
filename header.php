@@ -12,7 +12,7 @@
     <ul class="nav navbar-nav navbar-right navbar-user">
         
  
-        <li class = "container-fluid" style="padding-right:5px;">
+        <li class = "container-fluid" style="padding-right:20px;">
             <div class="">
                 <?php if(isset($_SESSION['userEmail'])): ?>
                     <button id="nav-bar-home" type = "submit" class = "btn btn-info" onclick="parent.location='home.php'">
@@ -30,20 +30,6 @@
                     </button>
                 <?php endif; ?>
             </div>
-        <li class="divider-horizontal"></li>
-        <li>
-            <div class="navbar-search" style="padding-right:0px;">
-                <select class="form-control" style="margin-bottom:0px;">
-                    <option>Recipe Name</option>
-                    <option>Author</option>
-                    <option>Ingredient</option>
-                </select>
-            </div>
-        </li>
-        <li>
-            <form class="navbar-search">
-                <input type="text" placeholder="Search" class="form-control">
-            </form>
         </li>
     </ul>
 </nav>
