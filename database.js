@@ -235,6 +235,42 @@ function deleteIngredient(recipeId, ingredientName) {
     return xmlHttp.responseText;
 }
 
+function favoriteRecipe(recipeId, userEmail) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=10'
+        + '&recipeId=' + recipeId
+        + '&userEmail=' + userEmail;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+
+    alert(xmlHttp.responseText);
+
+    return xmlHttp.responseText;
+}
+
+function unfavoriteRecipe(recipeId, userEmail) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=11'
+        + '&recipeId=' + recipeId
+        + '&userEmail=' + userEmail;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+
+    alert(xmlHttp.responseText);
+
+    return xmlHttp.responseText;
+}
+
+
+
+
+
 /*console.log("Checking correct login:" + checkLogin('devasia', 'password'));
 console.log("Checking incorrect login:" + checkLogin('devasia', 'wrong'));
 

@@ -14,21 +14,21 @@
  
         <li class = "container-fluid" style="padding-right:20px;">
             <div class="">
-                <?php if(isset($_SESSION['userEmail'])): ?>
+                <?php if(isset($_SESSION['userEmail'])) { ?>
                     <button id="nav-bar-home" type = "submit" class = "btn btn-info" onclick="parent.location='home.php'">
                         <a class="button-text">Home </a>
                     </button>
                     <button id="nav-bar-signout" type = "submit" class = "btn btn-info" onclick="parent.location='logout.php'">
                         <a class="button-text">Sign Out</a>
                     </button>
-                <?php else: ?>
+                <?php } else {?>
                     <button id="nav-bar-signin" type="submit" class="btn btn-info" onclick="parent.location='signin.php'">
                         <a class="button-text">Sign In</a>
                     </button>
                     <button id="nav-bar-signup" type="submit" class="btn btn-info" onclick="parent.location='signup.php'">
                         <a class="button-text">Sign Up</a>
                     </button>
-                <?php endif; ?>
+                <?php } ?>
             </div>
         </li>
     </ul>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/local.css" />
     <link rel="stylesheet" type="text/css" href="css/custom.css" />
 
-    
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />

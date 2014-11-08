@@ -1,11 +1,5 @@
-<?php
-//    require $_SERVER['DOCUMENT_ROOT'] . '/html_header.php';
-//    require $_SERVER['DOCUMENT_ROOT'] . '/database_interface.php';
-    require 'html_header.php';
-    require 'database_interface.php';
-
-?>
-
+<?php require 'html_header.php'; ?>
+<?php require 'database_interface.php'; ?>
 <?php
 if (isset($_SESSION['userEmail'])) {
     $GLOBALS['userEmail'] = $_SESSION['userEmail'];
@@ -13,10 +7,6 @@ if (isset($_SESSION['userEmail'])) {
 ?>
 
 <body>
-<script>
-   
-</script>
-
 <style>
 .ui-widget {
     font-family: Verdana,Arial,sans-serif;
@@ -70,10 +60,7 @@ if (isset($_SESSION['userEmail'])) {
 }
 
 </style>
-    <?php
-    // require $_SERVER['DOCUMENT_ROOT'] . '/header.php';
-    require 'header.php';
-    ?>
+<?php require 'header.php';?>
 <div id="page-wrapper">
 
     <div class="row">
@@ -86,16 +73,13 @@ if (isset($_SESSION['userEmail'])) {
 
 
     <div class="column">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"> Your Recipes</h3>
                 </div>
                 <div class="panel-body feed">
                     <?php 
-                    
-                    // echo checkLogin('devasia', 'password1');
-                    $recipeTitle = 'Ramen';
                     $recipes = getUserRecipes($GLOBALS['userEmail']);
                     foreach ($recipes as $recipe) {
                         echo '<section class="feed-item"><div class="feed-item-body">';
@@ -378,95 +362,35 @@ $('#editRecipeDialog').dialog({
 $('#addRecipe').click( function() { 
     $("#addRecipeDialog").dialog("open");
 });
-
-
-
-
 </script>
-        <!--   
-            <div class="column">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> Favorites</h3>
-                        </div>
-                        <div class="panel-body feed">
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
 
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
+    <div class="column">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> Favorites</h3>
+                </div>
+                <div class="panel-body feed">
+                    <?php $thisUsersFavorites = getUserFavorites($userEmail);
+                        foreach($thisUsersFavorites as $row) { ?>
+                        <a href="recipe.php?id=<?php echo $row["recipeID"];?>">
+                            <?php echo $row["recipeName"];?>
+                        </a><br/>
+                     <?php } ?>
+                    <section class="feed-item">
+                        <div class="feed-item-body">
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> One-Click Shopping List</h3>
-                        </div>
-                        <div class="panel-body feed">
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
 
-                            <section class="feed-item">
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                            <section class="feed-item">
 
-                            </section>
-                            <section class="feed-item">
-                                <div class="icon pull-left">
-                                </div>
-                                <div class="feed-item-body">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+
+
+
 </body>
 <?php
 // require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';

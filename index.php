@@ -8,7 +8,7 @@
 
             parent.location= 'results.php?col=' + field + "&query=" + search;
         }
-    </script>	
+    </script>
     <div id="page-wrapper">
         <h1>Search Recipes</h1>
 

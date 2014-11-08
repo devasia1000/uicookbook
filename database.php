@@ -205,7 +205,7 @@
         $result = $link->query($query_string);
 
         echo('1');
-    } else if ($query_type == '9') {
+    } else if ($query_type == '9') { // Delete all Ingredients (called when recipe is deleted)
         $recipeId = $_GET["recipeId"];
         $ingredientName = $_GET["ingredientName"];
 
@@ -213,6 +213,28 @@
 
         //execute the query.
         $result = $link->query($query_string);
+    } else if ($query_type == '10') { // Favorite a Recipe
+        $recipeId = $_GET["recipeId"];
+        $userEmail = $_GET["userEmail"];
+
+        $query_string = "INSERT INTO favorites(userEmail, recipeID) VALUES ('$userEmail', $recipeId)";
+
+        //execute the query.
+        $result = $link->query($query_string);
+
+
+        echo "1";
+    } else if ($query_type == '11') { // Favorite a Recipe
+        $recipeId = $_GET["recipeId"];
+        $userEmail = $_GET["userEmail"];
+
+        $query_string = "DELETE FROM favorites WHERE recipeID = '$recipeId' AND userEmail = '$userEmail'";
+
+        //execute the query.
+        $result = $link->query($query_string);
+
+
+        echo "1";
     } else {
 		echo("InvalidRequest");
 	}

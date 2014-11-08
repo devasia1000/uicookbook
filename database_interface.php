@@ -198,3 +198,61 @@ function getRecipeIngredients($recipeId) {
 
     return $result_arr;
 }
+
+function getRecipeRating($recipeId) {
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $query_string = "SELECT AVG(rating) FROM ratings WHERE recipeId = '$recipeId'";
+
+    $result = $link->query($query_string);
+
+    return mysqli_fetch_array($result)[0][0];
+}
+
+function hasUserFavorited($userEmail, $recipeId) {
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $query_string = "SELECT * FROM favorites WHERE recipeId = '$recipeId' AND userEmail = '$userEmail'";
+
+    $result = $link->query($query_string);
+
+    if (mysqli_num_rows($result) == 1) {
+       return true;
+    }
+    return false;
+}
+
+function getUserFavorites($userEmail)
+{
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $query_string = "SELECT favorites.recipeID, recipes.recipeName FROM favorites, recipes WHERE recipes.recipeid = favorites.recipeID AND favorites.userEmail = '$userEmail'";
+
+    $result = $link->query($query_string);
+
+    $result_arr = array();
+
+    // TODO: fix bug where each field appears twice
+    while($row = mysqli_fetch_array($result)) {
+        array_push($result_arr, $row);
+    }
+
+    return $result_arr;
+}
