@@ -71,44 +71,31 @@ if (isset($_SESSION['userEmail'])) {
 
 
 
-
     <div class="column">
+
+<!-- YOUR RECIPES -->
+<?php $recipes = getUserRecipes($GLOBALS['userEmail']);?>
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"> Your Recipes</h3>
                 </div>
                 <div class="panel-body feed">
-                    <?php 
-                    $recipes = getUserRecipes($GLOBALS['userEmail']);
-                    foreach ($recipes as $recipe) {
-                        echo '<section class="feed-item"><div class="feed-item-body">';
-                                
-                                echo '<a href="recipe.php?id=';
-                                echo $recipe["recipeid"];
-                                echo '">';
-                                                                echo $recipe["recipeName"];
-                                                                echo "    ";
-                               echo '</a>';
-                                
-                               $echoString = 
-               '<button type="button" class="btn btn-info" onclick ="handleEdit(\'' . $recipe["recipeid"] . '\')">
-                    <a class="button-text">Edit</a>
-                </button>
-                <button type = "button" class = "btn btn-info" onclick ="handleDelete(\'' . $recipe["recipeid"] . '\')">
-                    <a class="button-text">Delete</a>
-                </button>';
-                
-                	echo $echoString;
-                        echo '</div></section>';
-                    } 
-                    ?>
-                    <section class="feed-item">
-                        <div class="feed-item-body">
-                        
-                        </div>
-                    </section>
-                    
+                    <?php foreach ($recipes as $recipe) { ?>
+                        <section class="feed-item">
+                            <div class="feed-item-body">
+                                <a href="recipe.php?id=<?php echo $recipe["recipeid"];?>">
+                                    <?php echo $recipe["recipeName"];?>
+                                </a>
+                               <button type="button" class="btn btn-info" onclick ="handleEdit('<?php echo $recipe["recipeid"];?>')">
+                                    <a class="button-text">Edit</a>
+                                </button>
+                                <button type = "button" class = "btn btn-info" onclick ="handleDelete('<?php echo $recipe["recipeid"];?>')">
+                                    <a class="button-text">Delete</a>
+                                </button>
+                            </div>
+                        </section>
+                    <?php } ?>
                 </div>
                 <button type = "button" id="addRecipe" class = "btn btn-info button-text">
                  Add
@@ -116,6 +103,8 @@ if (isset($_SESSION['userEmail'])) {
             </div>
         </div>
     </div>
+    <!-- YOUR RECIPES -->
+    <!-- #################################### DIALOGS #################################### -->
 <div id="addRecipeDialog" title="Add a Recipe">
     <div style="padding:10px;">
         <b>Recipe Name:</b></br>
@@ -363,7 +352,7 @@ $('#addRecipe').click( function() {
     $("#addRecipeDialog").dialog("open");
 });
 </script>
-
+    <!-- #################################### FAVORITES #################################### -->
     <div class="column">
         <div class="col-md-6">
             <div class="panel panel-primary">
@@ -385,14 +374,11 @@ $('#addRecipe').click( function() {
             </div>
         </div>
     </div>
-
+    <!-- #################################### RATINGS #################################### -->
 
 
 
 
 
 </body>
-<?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
-require 'html_footer.php';
-?>
+<?php require 'html_footer.php';?>
