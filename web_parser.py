@@ -63,9 +63,9 @@ for url in urls:
                         ingredients.append(currentIngredient.decode('ascii'))
                         ingredients_counter += 1
                     else:
+                        currentIngredient = re.sub(r'[^\x00-\x7F]+', '', currentIngredient)
                         currentIngredientNumber = re.findall('\d+', currentIngredient)
                         currentIngredientUnit = re.sub('\d+', currentIngredient)
-                        currentIngredient = re.sub(r'[^\x00-\x7F]+', '', currentIngredient)
                         recipeData = []
                         recipeData.append(recipe_name)
                         recipeData.append("")

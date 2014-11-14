@@ -41,7 +41,6 @@ class DatabaseInteraction(object):
         self.cursor.execute(sql2, recipeData)
         recipeID = self.cursor.fetchone()
         thisRecipeID = int(recipeID[0])
-        print ingredients
 
         for x in range(0, ingredientsCounter):
             sql = """INSERT INTO ingredients(recipeID, ingredientName, amount)
@@ -75,7 +74,7 @@ class DatabaseInteraction(object):
         ingredientData.append(currentIngredient)
         self.cursor.execute(sql, ingredientData) #get the amount from the selected data
         databaseAmount = self.cursor.fetchone()
-        databaseNumber = re.findall('\d+', databaseAmount) #take the numbers out
+        databaseNumber = re.findall('\d+', databaseAmount[0]) #take the numbers out
         databaseNumber += currentIngredientNumber #add the number together
         updatedInformation = databaseNumber + ' ' + currentIngredientUnit #make a new string without unit conversion
         sql = """SELECT * FROM ingredients WHERE recipeID = %s AND ingredientName = %s"""
