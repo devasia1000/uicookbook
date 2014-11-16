@@ -267,6 +267,20 @@ function unfavoriteRecipe(recipeId, userEmail) {
     return xmlHttp.responseText;
 }
 
+function rateRecipe(recipeID, userEmail, rating) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=12'
+        + '&recipeId=' + recipeID
+        + '&userEmail=' + userEmail
+        + '&rating=' + rating;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+
+    return xmlHttp.responseText;
+}
 
 
 

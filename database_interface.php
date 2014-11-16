@@ -256,3 +256,19 @@ function getUserFavorites($userEmail)
 
     return $result_arr;
 }
+
+function getUserRating($userEmail, $recipeId) {
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $query_string = "SELECT rating FROM ratings WHERE recipeId = '$recipeId' AND userEmail= '$userEmail'";
+
+    $result = $link->query($query_string);
+
+    return mysqli_fetch_array($result)[0][0];
+}

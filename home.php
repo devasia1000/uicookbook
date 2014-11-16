@@ -1,10 +1,7 @@
 <?php require 'html_header.php'; ?>
 <?php require 'database_interface.php'; ?>
-<?php
-if (isset($_SESSION['userEmail'])) {
-    $GLOBALS['userEmail'] = $_SESSION['userEmail'];
-}
-?>
+
+
 
 <body>
 <style>
@@ -74,7 +71,7 @@ if (isset($_SESSION['userEmail'])) {
     <div class="column">
 
 <!-- YOUR RECIPES -->
-<?php $recipes = getUserRecipes($GLOBALS['userEmail']);?>
+<?php $recipes = getUserRecipes($_SESSION['userEmail']);?>
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -93,6 +90,7 @@ if (isset($_SESSION['userEmail'])) {
                                 <button type = "button" class = "btn btn-info" onclick ="handleDelete('<?php echo $recipe["recipeid"];?>')">
                                     <a class="button-text">Delete</a>
                                 </button>
+                                Rating: <?php echo getRecipeRating($recipe["recipeid"]);?>
                             </div>
                         </section>
                     <?php } ?>
@@ -268,7 +266,7 @@ function handleEdit(recipeid) {
 }
 
 function submitEditHandler(event) {
-	var userEmail = "<?php echo $GLOBALS['userEmail'];?>";
+	var userEmail = "<?php echo $_SESSION['userEmail'];?>";
     var recipeId = event.data.id;
 	var recipeName = $("#editName").val();
 	var recipeSteps = $("#editSteps").val();
@@ -308,7 +306,7 @@ $('#addRecipeDialog').dialog({
     resizable: false,
     buttons: {
         "Submit": function() {
-            var userEmail = "<?php echo $GLOBALS['userEmail'];?>";
+            var userEmail = "<?php echo $_SESSION['userEmail'];?>";
             var recipeName = $("#addName").val();
             var recipeSteps = $("#addSteps").val();
 
@@ -360,7 +358,7 @@ $('#addRecipe').click( function() {
                     <h3 class="panel-title"> Favorites</h3>
                 </div>
                 <div class="panel-body feed">
-                    <?php $thisUsersFavorites = getUserFavorites($userEmail);
+                    <?php $thisUsersFavorites = getUserFavorites($_SESSION['userEmail']);
                         foreach($thisUsersFavorites as $row) { ?>
                         <a href="recipe.php?id=<?php echo $row["recipeID"];?>">
                             <?php echo $row["recipeName"];?>
@@ -375,8 +373,6 @@ $('#addRecipe').click( function() {
         </div>
     </div>
     <!-- #################################### RATINGS #################################### -->
-
-
 
 
 
