@@ -205,14 +205,8 @@
         $result = $link->query($query_string);
 
         echo('1');
-    } else if ($query_type == '9') { // Delete all Ingredients (called when recipe is deleted)
-        $recipeId = $_GET["recipeId"];
-        $ingredientName = $_GET["ingredientName"];
+    } else if ($query_type == '9') {
 
-        $query_string = "DELETE FROM ingredients WHERE recipeId='$recipeId' AND ingredientName = '$ingredientName'";
-
-        //execute the query.
-        $result = $link->query($query_string);
     } else if ($query_type == '10') { // Favorite a Recipe
         $recipeId = $_GET["recipeId"];
         $userEmail = $_GET["userEmail"];

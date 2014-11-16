@@ -114,7 +114,7 @@ function deleteRecipe (recipeId) {
 	if (recipeId.indexOf("%") > -1 || recipeId.indexOf("-") > -1) {
 		return 0;
 	}
-	
+
 	var xmlHttp = null;
 
 	var query_string = 'query_type=3'
@@ -215,19 +215,6 @@ function updateIngredient(recipeId, ingredientName, ingredientAmount) {
         + '&recipeId=' + recipeId
         + '&ingredientName=' + ingredientName
         + '&amount=' + ingredientAmount;
-
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "database.php?" + query_string, false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-}
-
-function deleteIngredient(recipeId, ingredientName) {
-    var xmlHttp = null;
-
-    var query_string = 'query_type=9'
-        + '&recipeId=' + recipeId
-        + '&ingredientName=' + ingredientName;
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "database.php?" + query_string, false);
