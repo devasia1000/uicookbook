@@ -233,8 +233,6 @@ function favoriteRecipe(recipeId, userEmail) {
     xmlHttp.open("GET", "database.php?" + query_string, false);
     xmlHttp.send(null);
 
-    alert(xmlHttp.responseText);
-
     return xmlHttp.responseText;
 }
 
@@ -248,8 +246,6 @@ function unfavoriteRecipe(recipeId, userEmail) {
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "database.php?" + query_string, false);
     xmlHttp.send(null);
-
-    alert(xmlHttp.responseText);
 
     return xmlHttp.responseText;
 }

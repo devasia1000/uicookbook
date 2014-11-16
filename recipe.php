@@ -65,7 +65,12 @@
             <?php }?>
 
         </div>
-        <h3 style="margin-left:15px;margin-top:35px;margin-bottom:0;">Rating: <?php if ($recipeRating != null) {;?><?php echo $recipeRating;?><?php } else { ?><?php echo "Not Yet Rated";?><?php }?></h3>
+        <h3 style="margin-left:15px;margin-top:35px;margin-bottom:0;">Rating:
+            <?php
+            if ($recipeRating != null) {
+                echo $recipeRating;
+            } else echo "Not Yet Rated";
+            ?></h3>
         <h3 style="margin-left:15px;margin-top:35px;margin-bottom:0;">
             By: <?php echo $recipe["userEmail"]; ?>
         </h3>

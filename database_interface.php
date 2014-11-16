@@ -257,28 +257,23 @@ function getUserFavorites($userEmail)
     return $result_arr;
 }
 
-<<<<<<< HEAD
-function insertIngredient($recipeId, $ingredientName, $amount) {
-=======
 function getUserRating($userEmail, $recipeId) {
     // Create connection
->>>>>>> origin/master
-    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu", "uicookbo_develop", "password", "uicookbo_main");
 
     // Check connection
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
+    $query_string = "SELECT rating FROM ratings WHERE recipeId = '$recipeId' AND userEmail = '$userEmail'";
 
-<<<<<<< HEAD
-    $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
+    $result = $link->query($query_string);
 
-    //execute the query.
-    $link->query($query_string);
+    return mysqli_fetch_array($result)[0][0];
 }
 
 function deleteIngredient($recipeId, $ingredientName) {
-    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu", "uicookbo_develop", "password", "uicookbo_main");
 
     // Check connection
     if (mysqli_connect_errno()) {
@@ -289,11 +284,18 @@ function deleteIngredient($recipeId, $ingredientName) {
 
     //execute the query.
     $link->query($query_string);
-=======
-    $query_string = "SELECT rating FROM ratings WHERE recipeId = '$recipeId' AND userEmail= '$userEmail'";
+}
 
-    $result = $link->query($query_string);
+function insertIngredient($recipeId, $ingredientName, $amount) {
+    $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
 
-    return mysqli_fetch_array($result)[0][0];
->>>>>>> origin/master
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    //execute the query.
+    $link->query($query_string);
 }
