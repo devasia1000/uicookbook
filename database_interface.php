@@ -257,7 +257,12 @@ function getUserFavorites($userEmail)
     return $result_arr;
 }
 
+<<<<<<< HEAD
 function insertIngredient($recipeId, $ingredientName, $amount) {
+=======
+function getUserRating($userEmail, $recipeId) {
+    // Create connection
+>>>>>>> origin/master
     $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
 
     // Check connection
@@ -265,6 +270,7 @@ function insertIngredient($recipeId, $ingredientName, $amount) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
 
+<<<<<<< HEAD
     $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
 
     //execute the query.
@@ -283,4 +289,11 @@ function deleteIngredient($recipeId, $ingredientName) {
 
     //execute the query.
     $link->query($query_string);
+=======
+    $query_string = "SELECT rating FROM ratings WHERE recipeId = '$recipeId' AND userEmail= '$userEmail'";
+
+    $result = $link->query($query_string);
+
+    return mysqli_fetch_array($result)[0][0];
+>>>>>>> origin/master
 }

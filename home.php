@@ -1,10 +1,7 @@
 <?php require 'html_header.php'; ?>
 <?php require 'database_interface.php'; ?>
-<?php
-if (isset($_SESSION['userEmail'])) {
-    $GLOBALS['userEmail'] = $_SESSION['userEmail'];
-}
-?>
+
+
 
 <body>
 <?php require 'header.php';?>
@@ -16,7 +13,13 @@ if (isset($_SESSION['userEmail'])) {
     </div>
     <!-- #################################### YOUR RECIPES  #################################### -->
     <div class="column">
+<<<<<<< HEAD
         <?php $recipes = getUserRecipes($GLOBALS['userEmail']);?>
+=======
+
+<!-- YOUR RECIPES -->
+<?php $recipes = getUserRecipes($_SESSION['userEmail']);?>
+>>>>>>> origin/master
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -36,6 +39,7 @@ if (isset($_SESSION['userEmail'])) {
                                 <button type = "button" class = "btn btn-info" onclick ="handleDelete('<?php echo $recipe["recipeid"];?>')">
                                     <a class="button-text">Delete</a>
                                 </button>
+                                Rating: <?php echo getRecipeRating($recipe["recipeid"]);?>
                             </div>
                         </section>
                     <?php } ?>
@@ -47,6 +51,7 @@ if (isset($_SESSION['userEmail'])) {
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <script>
     function handleDelete(recipeid) {
         deleteRecipe(recipeid);
@@ -54,6 +59,148 @@ if (isset($_SESSION['userEmail'])) {
         location.reload();
     }
     </script>
+=======
+    <!-- YOUR RECIPES -->
+    <!-- #################################### DIALOGS #################################### -->
+<div id="addRecipeDialog" title="Add a Recipe">
+    <div style="padding:10px;">
+        <b>Recipe Name:</b></br>
+        <input id="addName"></input>
+        <hr style="height:2px;border:none;background-color:#2a9fd6;">
+        <table style="color: #000000;">
+            <tr style="color: #ffffff;background-color:#2a9fd6">
+                <td> #</td>
+                <td> Ingredient</td>
+                <td> Amount</td>
+                <td> #</td>
+                <td> Ingredient</td>
+                <td> Amount</td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">1</td>
+                <td><input id="add_ingredient_name_1"/></td>
+                <td><input id="add_ingredient_amount_1" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">6</td>
+                <td><input id="add_ingredient_name_6"/></td>
+                <td><input id="add_ingredient_amount_6" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">2</td>
+                <td><input id="add_ingredient_name_2"/></td>
+                <td><input id="add_ingredient_amount_2" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">7</td>
+                <td><input id="add_ingredient_name_7"/></td>
+                <td><input id="add_ingredient_amount_7" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">3</td>
+                <td><input id="add_ingredient_name_3"/></td>
+                <td><input id="add_ingredient_amount_3" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">8</td>
+                <td><input id="add_ingredient_name_8"/></td>
+                <td><input id="add_ingredient_amount_8" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">4</td>
+                <td><input id="add_ingredient_name_4"/></td>
+                <td><input id="add_ingredient_amount_4" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">9</td>
+                <td><input id="add_ingredient_name_9"/></td>
+                <td><input id="add_ingredient_amount_9" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">5</td>
+                <td><input id="add_ingredient_name_5"/></td>
+                <td><input id="add_ingredient_amount_5" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">10</td>
+                <td><input id="add_ingredient_name_10"/></td>
+                <td><input id="add_ingredient_amount_10" size="4"/></td>
+            </tr>
+        </table>
+        <hr style="height:2px;border:none;background-color:#2a9fd6;">
+        <b>Steps:</b>  </br>
+        <textarea id="addSteps" rows="10" cols="75">
+I am a text area for steps.
+        </textarea>
+    </div>
+</div>
+
+<div id="editRecipeDialog" title="Edit a Recipe">
+    <div style="padding:10px;">
+        <b>Recipe Name:</b></br>
+        <input id="editName"></input>
+        <hr style="height:2px;border:none;background-color:#2a9fd6;">
+        Input amount 0 to delete ingredient.
+        <table style="color: #000000;">
+            <tr style="color: #ffffff;background-color:#2a9fd6">
+                <td> #</td>
+                <td> Ingredient</td>
+                <td> Amount</td>
+                <td> #</td>
+                <td> Ingredient</td>
+                <td> Amount</td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">1</td>
+                <td><input id="edit_ingredient_name_1"/></td>
+                <td><input id="edit_ingredient_amount_1" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">6</td>
+                <td><input id="edit_ingredient_name_6"/></td>
+                <td><input id="edit_ingredient_amount_6" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">2</td>
+                <td><input id="edit_ingredient_name_2"/></td>
+                <td><input id="edit_ingredient_amount_2" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">7</td>
+                <td><input id="edit_ingredient_name_7"/></td>
+                <td><input id="edit_ingredient_amount_7" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">3</td>
+                <td><input id="edit_ingredient_name_3"/></td>
+                <td><input id="edit_ingredient_amount_3" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">8</td>
+                <td><input id="edit_ingredient_name_8"/></td>
+                <td><input id="edit_ingredient_amount_8" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">4</td>
+                <td><input id="edit_ingredient_name_4"/></td>
+                <td><input id="edit_ingredient_amount_4" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">9</td>
+                <td><input id="edit_ingredient_name_9"/></td>
+                <td><input id="edit_ingredient_amount_9" size="4"/></td>
+            </tr>
+            <tr>
+                <td style="color: #000000;background-color:#d9d9d9">5</td>
+                <td><input id="edit_ingredient_name_5"/></td>
+                <td><input id="edit_ingredient_amount_5" size="4"/></td>
+                <td style="color: #000000;background-color:#d9d9d9">10</td>
+                <td><input id="edit_ingredient_name_10"/></td>
+                <td><input id="edit_ingredient_amount_10" size="4"/></td>
+            </tr>
+        </table>
+        <hr style="height:2px;border:none;background-color:#2a9fd6;">
+        <b>Steps:</b>  </br>
+        <textarea id="editSteps" rows="10" cols="75">
+I am a text area for steps.
+        </textarea>
+    </div>
+</div>
+
+
+<script>
+
+function handleDelete(recipeid) {
+	deleteRecipe(recipeid);
+	alert("Recipe has been deleted");
+	location.reload();
+}
+
+</script>
+
+
     <!-- #################################### FAVORITES #################################### -->
     <div class="column">
         <div class="col-md-6">
@@ -62,7 +209,7 @@ if (isset($_SESSION['userEmail'])) {
                     <h3 class="panel-title"> Favorites</h3>
                 </div>
                 <div class="panel-body feed">
-                    <?php $thisUsersFavorites = getUserFavorites($userEmail);
+                    <?php $thisUsersFavorites = getUserFavorites($_SESSION['userEmail']);
                         foreach($thisUsersFavorites as $row) { ?>
                         <a href="recipe.php?id=<?php echo $row["recipeID"];?>">
                             <?php echo $row["recipeName"];?>
@@ -77,8 +224,6 @@ if (isset($_SESSION['userEmail'])) {
         </div>
     </div>
     <!-- #################################### RATINGS #################################### -->
-
-
 
 
 
