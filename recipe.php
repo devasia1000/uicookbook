@@ -2,7 +2,6 @@
 <body>
     <?php require 'header.php';?>
     <?php
-
     require 'database_interface.php';
     // To be used to establish a favorite/rating system; must be logged-in in order to do these.
     if(isset($_SESSION['userEmail'])) {
