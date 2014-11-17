@@ -30,7 +30,7 @@ class DatabaseInteraction(object):
                  INSERT INTO recipes2(recipeName, steps, userEmail)
                  VALUES(%s, %s, %s)"""
         recipeData = []
-        email = ""
+        email = "fake@gmail.com"
         recipeData.append(recipe_name)
         recipeData.append(directions)
         recipeData.append(email)  #change later

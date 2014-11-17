@@ -65,7 +65,7 @@ for url in urls:
                     else:
                         currentIngredient = re.sub(r'[^\x00-\x7F]+', '', currentIngredient)
                         currentIngredientNumber = re.findall('\d+', currentIngredient)
-                        currentIngredientUnit = re.sub('\d+', currentIngredient)
+                        currentIngredientUnit = re.sub('\d+', '',currentIngredient)
                         recipeData = []
                         recipeData.append(recipe_name)
                         recipeData.append("")
