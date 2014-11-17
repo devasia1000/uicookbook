@@ -1,8 +1,8 @@
 <?php require 'html_header.php';?>
 <?php require 'database_interface.php';?>
 <?php
-$field = $_GET["col"];
-$query = $_GET["query"];
+$field = $_POST["col"];
+$query = $_POST["query"];
 
 $results = array();
 
@@ -16,6 +16,7 @@ if ($field == 'User Email') {
 <body>
     <?php require 'header.php';?>
     <div id="page-wrapper">
+        <?php if(empty($results)) echo "<h2>" . "No matching results" . "</h2>"; ?>
         <?php $alternator = 0; ?>
         <?php foreach($results as $result) {?>
             <?php if($alternator % 2 == 0) { ?>
@@ -24,6 +25,9 @@ if ($field == 'User Email') {
                             <?php echo $result["recipeName"];?>
                     </a></b></h3>
                     By: <?php echo $result["userEmail"];?>
+                    <?php $currentRating = getRecipeRating($result["recipeid"]);?>
+                    <?php if($currentRating == null) {?> <p>Rating: <?php echo 'Recipe Not Yet Rated';?></p><?php } ?>
+                    <?php if($currentRating != null) {?><p>Rating: <?php echo $currentRating;?></p><?php }?>
                 </div>
             <?php } else {?>
                 <div style="background-color:#757575;color:#000000;padding: 20px">
@@ -31,6 +35,9 @@ if ($field == 'User Email') {
                         <?php echo $result["recipeName"];?>
                     </a></b></h3>
                     By: <?php echo $result["userEmail"];?>
+                    <?php $currentRating = getRecipeRating($result["recipeid"]);?>
+                    <?php if($currentRating == null) {?> <p>Rating: <?php echo 'Recipe Not Yet Rated';?></p><?php } ?>
+                    <?php if($currentRating != null) {?><p>Rating: <?php echo $currentRating;?></p><?php }?>
                 </div>
             <?php }?>
         <?php $alternator++; } ?>

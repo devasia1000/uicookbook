@@ -112,7 +112,7 @@ INPUTS: recipeName
 OUTPUTS: returns a 1 if insert is successful
 	 returns a 0 if insert is NOT successful
 */
-function insertRecipe ($recipeName, $steps, $recipeUrl, $userEmail) {
+function insertRecipe ($recipeName, $steps, $userEmail) {
 	// Create connection
 	$link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
 
@@ -121,7 +121,7 @@ function insertRecipe ($recipeName, $steps, $recipeUrl, $userEmail) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 	
-	$query_string = "INSERT INTO recipes(recipeName, steps, recipeURL, userEmail) VALUES ('$recipeName', '$steps', '$recipeUrl', '$userEmail')";
+	$query_string = "INSERT INTO recipes(recipeName, steps, userEmail) VALUES ('$recipeName', '$steps', '$userEmail')";
 	
 	//execute the query. 
 	$result = $link->query($query_string);
@@ -163,7 +163,7 @@ INPUTS: recipeId
 OUTPUTS: returns a 1 if insert is successful
 	 returns a 0 if insert is NOT successful
 */
-function updateRecipe ($recipeId, $newRecipeName, $newSteps, $newRecipeUrl, $newUserEmail) {
+function updateRecipe ($recipeId, $newRecipeName, $newSteps) {
 	// Create connection
 	$link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
 
@@ -171,11 +171,11 @@ function updateRecipe ($recipeId, $newRecipeName, $newSteps, $newRecipeUrl, $new
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	
-	$query_string = "UPDATE recipes SET recipeName='$newRecipeName', steps='$newSteps', recipeUrl='$newRecipeUrl', userEmail='$newUserEmail' WHERE recipeId='$recipeId'";
-	
-	//execute the query. 
-	$result = $link->query($query_string);
+
+    $query_string = "UPDATE recipes SET recipeName='$newRecipeName', steps='$newSteps' WHERE recipeId='$recipeId'";
+
+    //execute the query.
+    $link->query($query_string);
 		
 	return 1;
 }
@@ -255,4 +255,47 @@ function getUserFavorites($userEmail)
     }
 
     return $result_arr;
+}
+
+function getUserRating($userEmail, $recipeId) {
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu", "uicookbo_develop", "password", "uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    $query_string = "SELECT rating FROM ratings WHERE recipeId = '$recipeId' AND userEmail = '$userEmail'";
+
+    $result = $link->query($query_string);
+
+    return mysqli_fetch_array($result)[0][0];
+}
+
+function deleteIngredient($recipeId, $ingredientName) {
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu", "uicookbo_develop", "password", "uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $query_string = "DELETE FROM ingredients WHERE recipeId='$recipeId' AND ingredientName = '$ingredientName'";
+
+    //execute the query.
+    $link->query($query_string);
+}
+
+function insertIngredient($recipeId, $ingredientName, $amount) {
+    $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
+    // Create connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    //execute the query.
+    $link->query($query_string);
 }

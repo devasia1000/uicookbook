@@ -40,6 +40,8 @@
 	    5 - Register New User
 	        INPUTS: $username, $userEmail, $password
 	        OUTPUTS: returns 1 on success and an error message on fail
+	    12 - Rate a Recipe
+	        INPUTS: $
 	*/
 	
 	
@@ -205,14 +207,8 @@
         $result = $link->query($query_string);
 
         echo('1');
-    } else if ($query_type == '9') { // Delete all Ingredients (called when recipe is deleted)
-        $recipeId = $_GET["recipeId"];
-        $ingredientName = $_GET["ingredientName"];
+    } else if ($query_type == '9') {
 
-        $query_string = "DELETE FROM ingredients WHERE recipeId='$recipeId' AND ingredientName = '$ingredientName'";
-
-        //execute the query.
-        $result = $link->query($query_string);
     } else if ($query_type == '10') { // Favorite a Recipe
         $recipeId = $_GET["recipeId"];
         $userEmail = $_GET["userEmail"];
@@ -235,6 +231,15 @@
 
 
         echo "1";
+    } else if($query_type == '12') { // Rate a Recipe
+        $recipeId = $_GET["recipeId"];
+        $userEmail = $_GET["userEmail"];
+        $rating = $_GET["rating"];
+
+        $query_string = "INSERT INTO ratings (recipeID, useremail, rating) VALUES ('$recipeId', '$userEmail', '$rating') ON DUPLICATE KEY UPDATE rating=VALUES(rating)";
+
+        //execute the query
+        $result = $link->query($query_string);
     } else {
 		echo("InvalidRequest");
 	}

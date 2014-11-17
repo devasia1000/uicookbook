@@ -114,7 +114,7 @@ function deleteRecipe (recipeId) {
 	if (recipeId.indexOf("%") > -1 || recipeId.indexOf("-") > -1) {
 		return 0;
 	}
-	
+
 	var xmlHttp = null;
 
 	var query_string = 'query_type=3'
@@ -163,7 +163,7 @@ function updateRecipe (recipeId, newRecipeName, newSteps, newUserEmail) {
  INPUTS: username, password, email
  OUTPUTS: returns a true else alerts an error message and returns false;
 */
-function registerUser(username, email, password) {
+function registerUser(username, email, password, confirm) {
     if (username === '' || email === '' || password === '') {
         alert("You left a field blank");
         return 0;
@@ -171,6 +171,10 @@ function registerUser(username, email, password) {
     // TODO(rfarias2): more password restraints
     if (password.length < 8) {
         alert("Password needs to be more than 8 characters long.");
+        return;
+    }
+    if (password !== confirm) {
+        alert("Password and Confirm Password do not match.");
         return;
     }
     var xmlHttp = null;
@@ -222,19 +226,6 @@ function updateIngredient(recipeId, ingredientName, ingredientAmount) {
     return xmlHttp.responseText;
 }
 
-function deleteIngredient(recipeId, ingredientName) {
-    var xmlHttp = null;
-
-    var query_string = 'query_type=9'
-        + '&recipeId=' + recipeId
-        + '&ingredientName=' + ingredientName;
-
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "database.php?" + query_string, false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-}
-
 function favoriteRecipe(recipeId, userEmail) {
     var xmlHttp = null;
 
@@ -245,8 +236,6 @@ function favoriteRecipe(recipeId, userEmail) {
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "database.php?" + query_string, false);
     xmlHttp.send(null);
-
-    alert(xmlHttp.responseText);
 
     return xmlHttp.responseText;
 }
@@ -262,11 +251,23 @@ function unfavoriteRecipe(recipeId, userEmail) {
     xmlHttp.open("GET", "database.php?" + query_string, false);
     xmlHttp.send(null);
 
-    alert(xmlHttp.responseText);
-
     return xmlHttp.responseText;
 }
 
+function rateRecipe(recipeID, userEmail, rating) {
+    var xmlHttp = null;
+
+    var query_string = 'query_type=12'
+        + '&recipeId=' + recipeID
+        + '&userEmail=' + userEmail
+        + '&rating=' + rating;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "database.php?" + query_string, false);
+    xmlHttp.send(null);
+
+    return xmlHttp.responseText;
+}
 
 
 
