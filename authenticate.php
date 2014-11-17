@@ -15,8 +15,8 @@ if (mysqli_connect_errno()) {
 }
 
 // Sanitize incoming username and password
-$identity = filter_var($_GET['identityToken'], FILTER_SANITIZE_STRING);
-$password = filter_var($_GET['password'], FILTER_SANITIZE_STRING);
+$identity = filter_var($_POST['identity'], FILTER_SANITIZE_STRING);
+$password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 $password = hash('sha256', $password);
 
 // Determine whether an account exists matching this username and password

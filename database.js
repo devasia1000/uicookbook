@@ -163,7 +163,7 @@ function updateRecipe (recipeId, newRecipeName, newSteps, newUserEmail) {
  INPUTS: username, password, email
  OUTPUTS: returns a true else alerts an error message and returns false;
 */
-function registerUser(username, email, password) {
+function registerUser(username, email, password, confirm) {
     if (username === '' || email === '' || password === '') {
         alert("You left a field blank");
         return 0;
@@ -171,6 +171,10 @@ function registerUser(username, email, password) {
     // TODO(rfarias2): more password restraints
     if (password.length < 8) {
         alert("Password needs to be more than 8 characters long.");
+        return;
+    }
+    if (password !== confirm) {
+        alert("Password and Confirm Password do not match.");
         return;
     }
     var xmlHttp = null;

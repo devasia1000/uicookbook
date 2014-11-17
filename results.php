@@ -1,8 +1,8 @@
 <?php require 'html_header.php';?>
 <?php require 'database_interface.php';?>
 <?php
-$field = $_GET["col"];
-$query = $_GET["query"];
+$field = $_POST["col"];
+$query = $_POST["query"];
 
 $results = array();
 
@@ -16,6 +16,7 @@ if ($field == 'User Email') {
 <body>
     <?php require 'header.php';?>
     <div id="page-wrapper">
+        <?php if(empty($results)) echo "<h2>" . "No matching results" . "</h2>"; ?>
         <?php $alternator = 0; ?>
         <?php foreach($results as $result) {?>
             <?php if($alternator % 2 == 0) { ?>

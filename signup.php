@@ -12,7 +12,9 @@ require 'header.php';
         var username = $("#username").val();
         var emailAddress = $("#emailAddress").val();
         var password = $("#password").val();
-        var result = registerUser(username, emailAddress, password);
+        var confirm = $("#confirm").val();
+
+        var result = registerUser(username, emailAddress, password, confirm);
         if(!result) {
             return;
         }
@@ -34,7 +36,7 @@ require 'header.php';
             </div>
         </div>
         <div>
-            <label for="emailaddress" class="col-md-2">
+            <label for="emailAddress" class="col-md-2">
                 Email Address:
             </label>
             <div class="col-md-9">
@@ -47,6 +49,14 @@ require 'header.php';
             </label>
             <div class="col-md-9">
                 <input type="password" class="form-control" id="password" placeholder="Enter Password">
+            </div>
+        </div>
+        <div>
+            <label for="password" class="col-md-2">
+                Confirm Password:
+            </label>
+            <div class="col-md-9">
+                <input type="password" class="form-control" id="confirm" placeholder="Confirm Password">
                 <p class="help-block">
                 </p>
             </div>
@@ -62,7 +72,4 @@ require 'header.php';
         </div>
     </div>
 </body>
-<?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/html_footer.php';
-require 'html_footer.php';
-?>
+<?php require 'html_footer.php'; ?>
