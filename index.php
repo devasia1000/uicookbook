@@ -16,7 +16,7 @@
                     <input id="search-bar" type="text" placeholder = "Search" name="query"
                            class="form-control">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </span>
