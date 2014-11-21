@@ -37,7 +37,7 @@ if ($field == 'User Email') {
                     By: <?php echo $result["userEmail"];?>
                     <?php $currentRating = getRecipeRating($result["recipeid"]);?>
                     <?php if($currentRating == null) {?> <p>Rating: <?php echo 'Recipe Not Yet Rated';?></p><?php } ?>
-                    <?php if($currentRating != null) {?><p>Rating: <?php echo $currentRating;?></p><?php }?>
+                    <?php if($currentRating != null) {?> <p>Rating: <?php echo $currentRating;?></p><?php }?>
                 </div>
             <?php }?>
         <?php $alternator++; } ?>

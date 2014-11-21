@@ -46,20 +46,41 @@
             location.reload();
         }
     </script>
+    <script>
+        function handleAddToSL(){
+            var recipeName = "<?php echo $recipe["recipeName"];?>";
+            var recipeID = "<?php echo $recipeID;?>";
+            parent.location = 'addsl.php?recipeName=' + recipeName + '&id=' + recipeID;
+        }
+        function handleRemoveFromSL() {
+            var recipeName = "<?php echo $recipe["recipeName"];?>";
+            var recipeID = "<?php echo $recipeID;?>";
+            parent.location = 'removesl.php?recipeName=' + recipeName + '&id=' + recipeID;
+        }
+    </script>
 
     <div id="page-wrapper">
         <div class = "container-fluid">
             <h1 style="float: left;text-decoration:underline;"><?php echo $recipe["recipeName"]?> </h1>
             <?php if($userEmail != null) {?>
                 <?php if(hasUserFavorited($userEmail, $recipeID)) {?>
-                    <button id="nav-bar-home" style="float: left;" type="submit" class="btn btn-info"
+                    <button id="nav-bar-home" style="float: left; margin-left: 10px;" type="submit" class="btn btn-info"
                             onclick="handleUnfavorite()">
                         <a class="button-text">Unfavorite</a>
                     </button>
                 <?php } else { ?>
-                    <button id="nav-bar-home" style="float: left;" type="submit" class="btn btn-info"
+                    <button id="nav-bar-home" style="float: left; margin-left: 10px;" type="submit" class="btn btn-info"
                             onclick="handleFavorite()">
                         <a class="button-text">Favorite</a>
+                    </button>
+                <?php } ?>
+                <?php if(isset($_SESSION["shopping_list"][$recipeID])) {?>
+                    <button id="remove-from-SL" style="margin-left: 10px;" type="submit" class="btn btn-info" onclick="handleRemoveFromSL()">
+                        <a class="button-text">Remove From Shopping List</a>
+                    </button>
+                <?php } else { ?>
+                    <button id="add-to-SL" style="margin-left: 10px;" type="submit" class="btn btn-info" onclick="handleAddToSL()">
+                            <a class="button-text">Add to Shopping List</a>
                     </button>
                 <?php } ?>
             <?php }?>
@@ -94,7 +115,7 @@
         <?php if($userEmail != null) {?>
             <h3 style="padding-left: 20px;">Like This Recipe?  Rate it below: </h3>
             <div class="container-fluid">
-                <div class="form-group" style="margin-bottom:0;width:5%;float:left;margin-left: 5px;">
+                <div class="form-group" style="margin-bottom:0;width:100px;float:left;margin-left: 5px;">
                     <?php $myRating = getUserRating($userEmail, $recipeID);?>
                     <select id="rating-fields" class="form-control">
                         <?php if($myRating == null) { ?>

@@ -1,11 +1,14 @@
 <?php require 'html_header.php'; ?>
 <?php require 'database_interface.php'; ?>
-
-
-
 <body>
 <?php require 'header.php';?>
 <div id="page-wrapper">
+    <?php
+    if(!isset($_SESSION['userEmail'])) {
+        echo "This page can only be accessed if you're logged in";
+        exit;
+    }
+    ?>
     <div class="row">
         <div class="col-lg-12">
             <h1>Homepage - UI Cookbook</h1>
@@ -14,7 +17,7 @@
     <!-- #################################### YOUR RECIPES  #################################### -->
     <div class="column">
     <?php $recipes = getUserRecipes($_SESSION['userEmail']);?>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"> Your Recipes</h3>
@@ -60,7 +63,7 @@
     </script>
     <!-- #################################### FAVORITES #################################### -->
     <div class="column">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"> Favorites</h3>
@@ -80,5 +83,33 @@
             </div>
         </div>
     </div>
+    <!-- #################################### Shopping List #################################### -->
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"> Your Shopping List</h3>
+            </div>
+            <div class="panel-body feed">
+                <?php if(isset($_SESSION["shopping_list"])) { ?>
+                    <?php
+                    foreach($_SESSION["shopping_list"] as $id => $name) { ?>
+                        <a href="recipe.php?id=<?php echo $id;?>"><?php echo $name?></a>
+                        <br/>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+            <?php if(isset($_SESSION["shopping_list"])) { ?>
+                <button type = "submit" id="generateSL" class = "btn btn-info button-text" onclick="parent.location='shoppinglist.php'">
+                    Generate
+                </button>
+                <button type = "submit" id="removeSL" class = "btn btn-info button-text" style="float: right;" onclick="parent.location='removeallsl.php'">
+                    Delete Entire Shopping List
+                </button>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+
 </body>
 <?php require 'html_footer.php';?>

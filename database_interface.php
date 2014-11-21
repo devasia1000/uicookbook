@@ -299,3 +299,33 @@ function insertIngredient($recipeId, $ingredientName, $amount) {
     //execute the query.
     $link->query($query_string);
 }
+
+function listIngredients($SL) {
+    $query_string = "SELECT * FROM ingredients WHERE";
+    foreach($SL as $id => $name) {
+        $query_string = $query_string . " recipeID = " . $id . " OR";
+    }
+    $query_string = substr($query_string, 0, -3);
+
+    // Create Connection
+    $link = mysqli_connect("engr-cpanel-mysql.engr.illinois.edu","uicookbo_develop","password","uicookbo_main");
+
+    // Check Connection
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    // Execute the query
+    $result = $link->query($query_string);
+    return $result;
+
+    // Prepare the Output
+    $result_arr = array();
+
+    while($row = mysqli_fetch_array($result)) {
+        array_push($result_arr, $row);
+        echo $row[0] . "</br></br>";
+    }
+
+    return $result_arr;
+}

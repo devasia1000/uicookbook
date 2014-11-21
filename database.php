@@ -41,7 +41,8 @@
 	        INPUTS: $username, $userEmail, $password
 	        OUTPUTS: returns 1 on success and an error message on fail
 	    12 - Rate a Recipe
-	        INPUTS: $
+	        INPUTS: $recipeId, $userEmail, $rating
+	        OUTPUTS: None
 	*/
 	
 	
@@ -240,7 +241,7 @@
 
         //execute the query
         $result = $link->query($query_string);
-    } else {
+    } else { // No Valid Query Type Has Been Requested
 		echo("InvalidRequest");
 	}
 	
