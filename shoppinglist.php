@@ -10,12 +10,17 @@
 <?php require 'html_header.php';?>
 <?php require 'header.php';?>
 <?php
-//$results = array();
-$results = listIngredients($_SESSION["shopping_list"]);
+if (isset($_SESSION["shopping_list"])) {
+    $results = listIngredients($_SESSION["shopping_list"]);
+}
+else {
+    $results = null;
+}
 ?>
 
 <body>
     <div id="page-wrapper">
+
         <div class="col-lg-12">
             <h1>Shopping List</h1>
         </div>
@@ -23,6 +28,14 @@ $results = listIngredients($_SESSION["shopping_list"]);
         <br/>
         <br/>
         <div class="col-lg-12">
+            <?
+            echo $results;
+
+            if($results = null) {
+                echo "nothing selected";
+                exit();
+            }
+            ?>
             <table>
                 <tr>
                     <td style="padding-right: 20px; margin-left: 20px;">

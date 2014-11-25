@@ -1,5 +1,4 @@
 <?php
-
 include 'database_interface.php';
 
 // Create connection
@@ -73,44 +72,6 @@ if ($query_type == '0') { // Used by mobile. Perform login validation
     $statement->free_result();
     $statement->close();
 
-} else if ($query_type == '1') { // Perform a search
-
-    $recipeId = sanitize($_GET["recipeId"]);
-    $recipeName = sanitize($_GET["recipeName"]);
-    $steps = sanitize($_GET["steps"]);
-    $userEmail = sanitize($_GET["userEmail"]);
-
-    //echo("recipeId $recipeId<br>recipeName $recipeName<br>steps $steps<br>recipeUrl $recipeUrl<br>userEmail $userEmail");
-
-    $query_string = "SELECT * FROM recipes WHERE recipeId LIKE '$recipeId' AND recipeName LIKE '$recipeName' AND steps LIKE '$steps' AND userEmail LIKE '$userEmail'";
-
-    //echo("$query_string");
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    $result_str = '';
-
-    while($row = mysqli_fetch_array($result)) {
-        echo($row['recipeid'] . ';;;');
-        echo($row['recipeName'] . ';;;');
-        echo($row['steps'] . ';;;');
-        echo($row['userEmail'] . '///');
-    }
-
-} else if ($query_type == '2') { // Perform an insert
-
-    $recipeName = $_GET["recipeName"];
-    $steps = $_GET["steps"];
-    $userEmail = $_GET["userEmail"];
-
-    $query_string = "INSERT INTO recipes(recipeName, steps, userEmail) VALUES ('$recipeName', '$steps', '$userEmail')";
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    echo($steps);
-
 } else if ($query_type == '3') { // Perform a delete
 
     $recipeId = $_GET["recipeId"];
@@ -126,21 +87,7 @@ if ($query_type == '0') { // Used by mobile. Perform login validation
 
     echo('1');
 
-} else if ($query_type == '4') { // Do an update
-
-    $recipeId = $_GET["recipeId"];
-    $newRecipeName = $_GET["newRecipeName"];
-    $newSteps = $_GET["newSteps"];
-    $newUserEmail = $_GET["newUserEmail"];
-
-    $query_string = "UPDATE recipes SET recipeName='$newRecipeName', steps='$newSteps', userEmail='$newUserEmail' WHERE recipeId='$recipeId'";
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    echo("1");
-
-} else if ($query_type == '5') {
+}  else if ($query_type == '5') {
 
     $username = $_GET["username"];
     $userEmail = $_GET["userEmail"];
@@ -168,47 +115,7 @@ if ($query_type == '0') { // Used by mobile. Perform login validation
 
     }
 
-} else if ($query_type == '6') {
-
-    $recipeId = $_GET["recipeId"];
-    $ingredientName = $_GET["ingredientName"];
-    $amount = $_GET["amount"];
-
-    $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount')";
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    echo('1');
-
-} else if ($query_type == '7') {
-
-    $recipeId = $_GET["recipeId"];
-
-    $query_string = "SELECT ingredientName, amount FROM ingredients WHERE recipeId = '$recipeId'";
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    while($row = mysqli_fetch_array($result)) {
-        echo($row['ingredientName'] . ';;;');
-        echo($row['amount'] . '///');
-    }
-
-} else if ($query_type == '8') {
-
-    $recipeId = $_GET["recipeId"];
-    $ingredientName = $_GET["ingredientName"];
-    $amount = $_GET["amount"];
-
-    $query_string = "INSERT INTO ingredients(recipeID, ingredientName, amount) VALUES ('$recipeId', '$ingredientName', '$amount') ON DUPLICATE KEY UPDATE ingredientName=VALUES(ingredientName), amount=VALUES(amount)";
-
-    //execute the query.
-    $result = $link->query($query_string);
-
-    echo('1');
-
-} else if ($query_type == '9') { // Used by mobile. Search for a recipe and return all information including ingredients
+}  else if ($query_type == '9') { // Used by mobile. Search for a recipe and return all information including ingredients
 
     $recipeId = sanitize($_GET["recipeId"]);
     $recipeName = sanitize($_GET["recipeName"]);
