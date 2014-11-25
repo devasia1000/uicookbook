@@ -37,7 +37,7 @@
                             <input type="text" name="recipeName"
                                    <?php
                                     if(isset($recipe)) {
-                                        echo 'value="' . $recipe[1] . '" ';
+                                        echo 'value="' . $recipe["recipeName"] . '" ';
                                         echo "readonly";
                                     }
                                     ?>><br>

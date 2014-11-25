@@ -11,14 +11,15 @@ require "database_interface.php";
 
 insertRecipe($_POST["recipeName"], $_POST["steps"], $_SESSION["userEmail"]);
 
-$recipeID = recipeSearch ('', $_POST["recipeName"], $_POST["steps"],$_SESSION["userEmail"])[0][0];
+$recipeID = recipeSearch ('', $_POST["recipeName"], $_POST["steps"],
+    $_SESSION["userEmail"])[0]["recipeid"];
+
+echo $recipeID;
 foreach($_POST["ingredients"] as $ingredient) {
     if ($ingredient["name"] !== "" && $ingredient["amount"] !== "") {
+        echo "inserting";
         insertIngredient($recipeID, $ingredient["name"], $ingredient["amount"]);
     }
 }
-
-
-
 
 header("Location: home.php");
